@@ -1,4 +1,11 @@
 .container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   font-family: Arial, Helvetica, sans-serif;
   text-align: center;
+}
+
+.table-container {
+  max-width: 300px;
 }

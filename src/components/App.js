@@ -51,7 +51,7 @@ const App = () => {
           ) : null
         )
       )}
-      {/* <SortTable accounts={accounts} /> */}
+      <SortTable accounts={accounts} />
     </div>
   );
 };

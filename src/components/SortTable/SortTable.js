@@ -1,6 +1,9 @@
 import React from "react";
 import { useTable, useSortBy } from "react-table";
+
+//SCSS & ICONS
 import "./SortTable.scss";
+import ForwardIcon from "@mui/icons-material/Forward";
 
 function Table({ columns, data }) {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = useTable(
@@ -11,9 +14,7 @@ function Table({ columns, data }) {
     useSortBy
   );
 
-  // We don't want to render all 2000 rows for this example, so cap
-  // it at 20 for this use case
-  const firstPageRows = rows.slice(0, 10);
+  const firstPageRows = rows.slice(0, data.length);
 
   return (
     <>
@@ -22,12 +23,19 @@ function Table({ columns, data }) {
           {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
-                // Add the sorting props to control sorting. For this example
-                // we can add them into the header props
                 <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                   {column.render("Header")}
-                  {/* Add a sort direction indicator */}
-                  <span>{column.isSorted ? (column.isSortedDesc ? " 🔽" : " 🔼") : ""}</span>
+                  <span>
+                    {!column.disableSortBy ? (
+                      column.isSortedDesc ? (
+                        <ForwardIcon className="arrow arrow-down" />
+                      ) : (
+                        <ForwardIcon className="arrow arrow-up" />
+                      )
+                    ) : (
+                      ""
+                    )}
+                  </span>
                 </th>
               ))}
             </tr>
@@ -46,35 +54,69 @@ function Table({ columns, data }) {
           })}
         </tbody>
       </table>
-      <br />
     </>
   );
 }
 
-const SortTable = ({ accounts }) => {
-  const columns = React.useMemo(
+function SortTable({ accounts }) {
+  const data = React.useMemo(
     () => [
       {
-        columns: [
-          {
-            Header: "Name",
-            accessor: accounts.name,
-          },
-          {
-            Header: "Profit & Loss",
-            accessor: accounts.profitLoss,
-          },
-          {
-            Header: "Account Type",
-            accessor: accounts.type,
-          },
-        ],
+        col1: "acc",
+        col2: "World",
+        col3: "World",
+      },
+      {
+        col1: "react-table",
+        col2: "rocks",
+        col3: "rocks",
+      },
+      {
+        col1: "whatever",
+        col2: "you want",
+        col3: "you want",
+      },
+      {
+        col1: "whatever",
+        col2: "you want",
+        col3: "you want",
+      },
+      {
+        col1: "whatever",
+        col2: "you want",
+        col3: "you want",
+      },
+      {
+        col1: "acc",
+        col2: "World",
+        col3: "World",
       },
     ],
     []
   );
 
-  return <Table columns={columns} data={accounts} />;
-};
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: "Name",
+        accessor: "col1", // accessor is the "key" in the data
+        sortDescFirst: true,
+      },
+      {
+        Header: "Profit & Loss",
+        accessor: "col2",
+        sortDescFirst: true,
+      },
+      {
+        Header: "Account Type",
+        accessor: "col3",
+        disableSortBy: true,
+      },
+    ],
+    []
+  );
+
+  return <Table columns={columns} data={data} />;
+}
 
 export default SortTable;
