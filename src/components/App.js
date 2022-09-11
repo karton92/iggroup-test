@@ -34,7 +34,10 @@ const App = () => {
   }, []);
   return (
     <div className="container">
-      <h2>Zadanie IG Group</h2>
+      <h2>Zadanie IG GROUP</h2>
+      <div className="table-header">
+        <Account className="table-header" name="Name" profitLoss="Profit & Loss" type="Account Type" />
+      </div>
       {isLoading ? (
         <LoadingSpinner />
       ) : (
