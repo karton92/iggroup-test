@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/iggroup-test/static/css/main.a47935a0.css",
+    "main.js": "/iggroup-test/static/js/main.0a42b724.js",
+    "index.html": "/iggroup-test/index.html",
+    "main.a47935a0.css.map": "/iggroup-test/static/css/main.a47935a0.css.map",
+    "main.0a42b724.js.map": "/iggroup-test/static/js/main.0a42b724.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a47935a0.css",
+    "static/js/main.0a42b724.js"
+  ]
+}
