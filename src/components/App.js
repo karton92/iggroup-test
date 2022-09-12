@@ -12,6 +12,13 @@ const App = () => {
   const [accountsTypes, setAccountsTypes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
+  const testData = [
+    { name: "Michał", profitLoss: 1000, type: "konto oszczednościowe" },
+    { name: "Michał", profitLoss: 1000, type: "konto oszczednościowe" },
+    { name: "Michał", profitLoss: 1000, type: "konto oszczednościowe" },
+    { name: "Michał", profitLoss: 1000, type: "konto oszczednościowe" },
+  ];
+
   const apiKey = "5d9f48133cbe87164d4bb12c";
   const urlAccounts = `https://recruitmentdb-508d.restdb.io/rest/accounts`;
   const urlAccountsTypes = `https://recruitmentdb-508d.restdb.io/rest/accounttypes`;
@@ -33,7 +40,7 @@ const App = () => {
     fetchData(urlAccountsTypes, apiKey, setAccountsTypes);
     fetchData(urlAccounts, apiKey, setAccounts);
     setTableData(
-      accounts.map((item) => ({
+      testData.map((item) => ({
         col1: item.name,
         col2: item.profitLoss,
         col3: item.type,
