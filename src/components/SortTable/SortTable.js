@@ -13,15 +13,13 @@ function Table({ columns, data }) {
     },
     useSortBy
   );
-
   const firstPageRows = rows.slice(0, data.length);
-
   return (
     <>
       <table {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
+            <tr className="table-header" {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
                 <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                   {column.render("Header")}
@@ -63,7 +61,7 @@ const SortTable = ({ tableData }) => {
     () => [
       {
         Header: "Name",
-        accessor: "col1", // accessor is the "key" in the data
+        accessor: "col1",
         sortDescFirst: true,
       },
       {
