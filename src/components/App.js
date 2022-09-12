@@ -16,21 +16,28 @@ const App = () => {
 
   const fetchData = useCallback(async (url, api, setMethod) => {
     setIsLoading(true);
-    const response = await axios({
-      method: "get",
-      headers: {
-        "x-api-key": api,
-      },
-      url: url,
-    });
-    await setMethod(response.data);
-    console.log(response.data);
-    setIsLoading(false);
+    try {
+      const response = await axios({
+        method: "get",
+        headers: {
+          "x-api-key": api,
+        },
+        url: url,
+      });
+      await setMethod(response.data);
+      console.log(response.data);
+      setIsLoading(false);
+    } catch (error) {
+      console.error(error);
+    }
   }, []);
 
   useEffect(() => {
     fetchData(urlAccountsTypes, apiKey, setAccountsTypes);
     fetchData(urlAccounts, apiKey, setAccounts);
+  }, []);
+
+  useEffect(() => {
     setTableData(
       accounts.map((item) => ({
         col1: item.name,
@@ -38,7 +45,8 @@ const App = () => {
         col3: accountsTypes.map((type) => (type.id.includes(item.accountType) ? type.title : null)),
       }))
     );
-  }, []);
+  }, [accounts]);
+
   return (
     <div className="container">
       <h1>Zadanie IG Group</h1>

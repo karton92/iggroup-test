@@ -1,16 +1,14 @@
 table {
-  min-width: 50vw;
+  min-width: 45vw;
   max-width: 80vw;
   border-spacing: 0;
   border: 1px solid black;
-  border-right: 0;
   font-size: 16px;
-  font-family: arial;
+  font-family: Arial, Helvetica, sans-serif;
   border: none;
   border-collapse: collapse;
 
   .table-header {
-    font-weight: 700;
     background-color: rgb(226, 236, 237);
   }
 
@@ -22,15 +20,25 @@ table {
     padding: 0.4rem;
     border: 1px solid black;
     text-align: left;
+    text-align: justify;
   }
 }
 
-.arrow-down {
-  transform: rotate(90deg);
-  color: rgb(69, 69, 69);
-}
+span {
+  display: flex;
+  justify-content: space-between;
 
-.arrow-up {
-  transform: rotate(-90deg);
-  color: rgb(69, 69, 69);
+  .arrow {
+    font-size: 18px;
+  }
+
+  .arrow-down {
+    transform: rotate(90deg);
+    color: rgb(118, 118, 118);
+  }
+
+  .arrow-up {
+    transform: rotate(-90deg);
+    color: rgb(118, 118, 118);
+  }
 }

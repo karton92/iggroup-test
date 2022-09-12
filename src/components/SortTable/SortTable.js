@@ -22,8 +22,8 @@ function Table({ columns, data }) {
             <tr className="table-header" {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
                 <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                  {column.render("Header")}
                   <span>
+                    {column.render("Header")}
                     {!column.disableSortBy ? (
                       column.isSortedDesc ? (
                         <ForwardIcon className="arrow arrow-down" />
