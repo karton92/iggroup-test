@@ -35,24 +35,7 @@ const App = () => {
   return (
     <div className="container">
       <h2>Zadanie IG GROUP</h2>
-      <div className="table-header">
-        <Account className="table-header" name="Name" profitLoss="Profit & Loss" type="Account Type" />
-      </div>
-      {isLoading ? (
-        <LoadingSpinner />
-      ) : (
-        accounts.map((account) =>
-          account.name ? (
-            <Account
-              key={account._id}
-              name={account.name}
-              profitLoss={account.profitLoss ? account.profitLoss : 0}
-              currency={account.currency}
-              type={accountsTypes.map((type) => (type.id.includes(account.accountType) ? type.title : null))}
-            />
-          ) : null
-        )
-      )}
+      <div className="table-header"></div>
     </div>
   );
 };
