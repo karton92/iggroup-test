@@ -49,7 +49,7 @@ const App = () => {
 
   return (
     <div className="container">
-      <h1>Zadanie IG Group</h1>
+      <h1>Zadanie rekrutacyjne IG Group</h1>
       {isLoading ? <LoadingSpinner /> : <SortTable tableData={tableData} />}
     </div>
   );
