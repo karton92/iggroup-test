@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useCallback } from "react";
 import "./App.scss";
-import Account from "./Account/Account";
 import LoadingSpinner from "./LoadingSpinner/LoadingSpinner";
 import axios from "axios";
+import SortTable from "./SortTable/SortTable";
 
 const App = () => {
   const [accounts, setAccounts] = useState([]);
+  const [tableData, setTableData] = useState([]);
   const [accountsTypes, setAccountsTypes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -13,7 +14,45 @@ const App = () => {
   const urlAccounts = `https://recruitmentdb-508d.restdb.io/rest/accounts`;
   const urlAccountsTypes = `https://recruitmentdb-508d.restdb.io/rest/accounttypes`;
 
-  return <div className="container"></div>;
+  const fetchData = useCallback(async (url, api, setMethod) => {
+    setIsLoading(true);
+    try {
+      const response = await axios({
+        method: "get",
+        headers: {
+          "x-api-key": api,
+        },
+        url: url,
+      });
+      await setMethod(response.data);
+      console.log(response.data);
+      setIsLoading(false);
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchData(urlAccountsTypes, apiKey, setAccountsTypes);
+    fetchData(urlAccounts, apiKey, setAccounts);
+  }, []);
+
+  useEffect(() => {
+    setTableData(
+      accounts.map((item) => ({
+        col1: item.name,
+        col2: `${item.currency} ${item.profitLoss}`,
+        col3: accountsTypes.map((type) => (type.id.includes(item.accountType) ? type.title : null)),
+      }))
+    );
+  }, [accounts]);
+
+  return (
+    <div className="container">
+      <h1>Zadanie rekrutacyjne IG Group</h1>
+      {isLoading ? <LoadingSpinner /> : <SortTable tableData={tableData} />}
+    </div>
+  );
 };
 
 export default App;
