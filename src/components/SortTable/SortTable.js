@@ -58,43 +58,7 @@ function Table({ columns, data }) {
   );
 }
 
-function SortTable({ accounts }) {
-  const data = React.useMemo(
-    () => [
-      {
-        col1: "acc",
-        col2: "World",
-        col3: "World",
-      },
-      {
-        col1: "react-table",
-        col2: "rocks",
-        col3: "rocks",
-      },
-      {
-        col1: "whatever",
-        col2: "you want",
-        col3: "you want",
-      },
-      {
-        col1: "whatever",
-        col2: "you want",
-        col3: "you want",
-      },
-      {
-        col1: "whatever",
-        col2: "you want",
-        col3: "you want",
-      },
-      {
-        col1: "acc",
-        col2: "World",
-        col3: "World",
-      },
-    ],
-    []
-  );
-
+const SortTable = ({ tableData }) => {
   const columns = React.useMemo(
     () => [
       {
@@ -116,7 +80,7 @@ function SortTable({ accounts }) {
     []
   );
 
-  return <Table columns={columns} data={data} />;
-}
+  return <Table columns={columns} data={tableData} />;
+};
 
 export default SortTable;

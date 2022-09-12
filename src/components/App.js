@@ -4,9 +4,11 @@ import Account from "./Account/Account";
 import LoadingSpinner from "./LoadingSpinner/LoadingSpinner";
 import axios from "axios";
 import SortTable from "./SortTable/SortTable";
+import SortTableTest from "./SortTableTest/SortTableTest";
 
 const App = () => {
   const [accounts, setAccounts] = useState([]);
+  const [tableData, setTableData] = useState([]);
   const [accountsTypes, setAccountsTypes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -24,34 +26,49 @@ const App = () => {
       url: url,
     });
     await setMethod(response.data);
-    console.log(response.data);
-
     setIsLoading(false);
   }, []);
 
   useEffect(() => {
     fetchData(urlAccountsTypes, apiKey, setAccountsTypes);
     fetchData(urlAccounts, apiKey, setAccounts);
+    setTableData(
+      accounts.map((item) => ({
+        col1: item.name,
+        col2: item.profitLoss,
+        col3: item.type,
+      }))
+    );
   }, []);
   return (
     <div className="container">
       <h2>Zadanie IG Group</h2>
-      {isLoading ? (
+      {/* {isLoading ? (
         <LoadingSpinner />
       ) : (
-        accounts.map((account) =>
-          account.name ? (
-            <Account
-              key={account._id}
-              name={account.name}
-              profitLoss={account.profitLoss ? account.profitLoss : 0}
-              currency={account.currency}
-              type={accountsTypes.map((type) => (type.id.includes(account.accountType) ? type.title : null))}
-            />
-          ) : null
-        )
-      )}
-      <SortTable accounts={accounts} />
+        <table>
+          <tr className="table-header">
+            <td>Name</td>
+            <td>Profit & Loss</td>
+            <td>Account Type</td>
+          </tr>
+          {accounts.map((account) =>
+            account.name ? (
+              <SortTableTest
+                key={account._id}
+                name={account.name}
+                profitLoss={account.profitLoss ? account.profitLoss : 0}
+                currency={account.currency}
+                type={accountsTypes.map((type) => (type.id.includes(account.accountType) ? type.title : null))}
+              />
+            ) : null
+          )}
+        </table>
+      )} */}
+
+      {/* {isLoading ? <LoadingSpinner /> : <SortTable accounts={accounts} tableData={tableData} />} */}
+
+      <SortTable accounts={accounts} data={tableData} />
     </div>
   );
 };
